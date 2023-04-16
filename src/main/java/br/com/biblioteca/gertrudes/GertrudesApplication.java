@@ -1,13 +1,14 @@
-package br.com.biblioteca.bibliotecagertrudes;
+package br.com.biblioteca.gertrudes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BibliotecaGertrudesApplication {
+public class GertrudesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BibliotecaGertrudesApplication.class, args);
+		SpringApplication.run(GertrudesApplication.class, args);
 	}
+
 
 }
