@@ -1,10 +1,10 @@
-package br.com.biblioteca.bibliotecagertrudes;
+package br.com.biblioteca;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BibliotecaGertrudesApplicationTests {
+class GertrudesApplicationTests {
 
 	@Test
 	void contextLoads() {

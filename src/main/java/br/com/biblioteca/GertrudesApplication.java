@@ -1,4 +1,4 @@
-package br.com.biblioteca.gertrudes;
+package br.com.biblioteca;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +9,5 @@ public class GertrudesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GertrudesApplication.class, args);
 	}
-
 
 }

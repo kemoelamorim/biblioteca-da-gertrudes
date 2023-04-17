@@ -1,9 +1,10 @@
 
+
 spring:
   datasource:
     username: postgres
     password: root
-    url: jdbc:postgresql://127.0.0.1:5432/teste
+    url: jdbc:postgresql://127.0.0.1:5432/biblioteca
   jpa:
     show-sql: true
     properties:
@@ -14,5 +15,5 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
   mvc:
-      pathmatch:
-                matching-strategy: ant_path_matcher
+    pathmatch:
+      matching-strategy: ant_path_matcher
