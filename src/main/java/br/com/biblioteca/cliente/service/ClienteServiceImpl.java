@@ -4,6 +4,8 @@ import br.com.biblioteca.cliente.model.Cliente;
 import br.com.biblioteca.cliente.model.ClienteDTO;
 import br.com.biblioteca.cliente.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +17,8 @@ public class ClienteServiceImpl implements ClienteService{
     @Autowired
     ClienteRepository clienteRepository;
     @Override
-    public List<ClienteDTO> findAll() {
-        List<Cliente> clientes = this.clienteRepository.findAll();
-        return ClienteDTO.converter(clientes);
+    public Page<Cliente> findAll(Pageable pageable) {
+        return this.clienteRepository.findAll(pageable);
     }
 
     @Override

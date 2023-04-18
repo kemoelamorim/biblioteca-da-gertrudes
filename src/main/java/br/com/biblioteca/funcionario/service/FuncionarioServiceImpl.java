@@ -4,6 +4,8 @@ import br.com.biblioteca.funcionario.model.Funcionario;
 import br.com.biblioteca.funcionario.model.FuncionarioDTO;
 import br.com.biblioteca.funcionario.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +18,8 @@ public class FuncionarioServiceImpl implements FuncionarioService{
     FuncionarioRepository funcionarioRepository;
 
     @Override
-    public List<FuncionarioDTO> findAll() {
-        List<Funcionario> funcionarios = this.funcionarioRepository.findAll();
-        return FuncionarioDTO.converter(funcionarios);
+    public Page<Funcionario> findAll(Pageable pageable) {
+        return this.funcionarioRepository.findAll(pageable);
     }
 
     @Override

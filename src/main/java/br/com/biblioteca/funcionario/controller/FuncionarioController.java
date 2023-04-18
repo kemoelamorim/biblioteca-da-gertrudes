@@ -1,17 +1,22 @@
 package br.com.biblioteca.funcionario.controller;
 
+import br.com.biblioteca.cliente.model.Cliente;
+import br.com.biblioteca.cliente.model.ClienteDTO;
 import br.com.biblioteca.endereco.model.EnderecoDTO;
 import br.com.biblioteca.endereco.service.ServiceViaCepImpl;
 import br.com.biblioteca.funcionario.model.Funcionario;
 import br.com.biblioteca.funcionario.model.FuncionarioDTO;
 import br.com.biblioteca.funcionario.service.FuncionarioServiceImpl;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,16 +31,32 @@ public class FuncionarioController {
     @Autowired
     ServiceViaCepImpl viaCepService;
 
-    @ApiOperation(value = "Retorna uma lista de funcionarios")
+    @ApiOperation(value = "Retorna uma lista de funcionarios, com paginação")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna uma lista de funcionarios"),
             @ApiResponse(code = 204, message = "Sem conteúdo"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção")
     })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+                    value = "Pagina a ser carregada", defaultValue = "0"),
+            @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+                    value = "Quantidade de registros", defaultValue = "5"),
+            @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+                    value = "Ordenacao dos registros")
+    })
     @GetMapping
-    public ResponseEntity<?> findAll(){
-        List<FuncionarioDTO> funcionarios = funcionarioService.findAll();
-        return !funcionarios.isEmpty() ? ResponseEntity.ok(funcionarios) : ResponseEntity.noContent().build();
+    public ResponseEntity<List<FuncionarioDTO>> findAll(
+            @PageableDefault(direction = Sort.Direction.DESC, page = 0, size = 10) @ApiIgnore Pageable pageable){
+        Page<Funcionario> funcionarios = funcionarioService.findAll(pageable);
+
+        List<FuncionarioDTO> funcionarioDTOS;
+
+        if(!funcionarios.getContent().isEmpty()){
+            funcionarioDTOS = FuncionarioDTO.converter(funcionarios.getContent());
+            return !funcionarioDTOS.isEmpty() ? ResponseEntity.ok(funcionarioDTOS) : ResponseEntity.noContent().build();
+        }
+        return  ResponseEntity.badRequest().build();
     }
     @ApiOperation(value = "Retorna o cep com maior incedencia")
     @ApiResponses(value = {
