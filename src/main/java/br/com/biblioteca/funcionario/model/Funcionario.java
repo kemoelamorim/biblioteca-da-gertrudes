@@ -1,9 +1,9 @@
-package br.com.biblioteca.cliente.model;
+package br.com.biblioteca.funcionario.model;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
 
 @Getter
 @Setter
@@ -11,11 +11,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "TB_CLIENTE")
-public class Cliente implements Serializable {
+@Table(name = "TB_FUNCIONARIO")
+public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_CLIENTE")
+    @Column(name = "ID_FUNCIONARIO")
     private Long id;
 
     @Column(name = "NOME_COMPLETO")
@@ -29,11 +29,11 @@ public class Cliente implements Serializable {
 
     @Column(name = "EMAIL")
     private String email;
-    public Cliente(ClienteDTO clienteDTO) {
-        this.id = clienteDTO.getId();
-        this.fullname = clienteDTO.getFullname();
-        this.cep = clienteDTO.getCep();
-        this.cpfCnpj = clienteDTO.getCpfCnpj();
-        this.email = clienteDTO.getEmail();
+    public Funcionario(FuncionarioDTO funcionarioDTO) {
+        this.id = funcionarioDTO.getId();
+        this.fullname = funcionarioDTO.getFullname();
+        this.cep = funcionarioDTO.getCep();
+        this.cpfCnpj = funcionarioDTO.getCpfCnpj();
+        this.email = funcionarioDTO.getEmail();
     }
 }

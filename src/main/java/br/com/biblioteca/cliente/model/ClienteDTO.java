@@ -12,15 +12,15 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class ClienteDTO {
     private Long id;
-    private String nome;
-    private String razaoSocial;
+    private String fullname;
+    private String cep;
     private String cpfCnpj;
     private String email;
     public ClienteDTO(Cliente cliente) {
         if(cliente != null) {
             this.id = cliente.getId();
-            this.nome = cliente.getNome();
-            this.razaoSocial = cliente.getRazaoSocial();
+            this.fullname = cliente.getFullname();
+            this.cep = cliente.getCep();
             this.cpfCnpj = cliente.getCpfCnpj();
             this.email = cliente.getEmail();
         }
